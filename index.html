@@ -10,21 +10,9 @@
 
 <body>
 	<div class="body_main">
-		<div class="telemetry">
-			<div class="telemetry_names_container">
-				<div>time:</div>
-				<div>velocity:</div>
-				<div>distance:</div>
-				<div>tel 04</div>
-				<div>tel hej</div>
-				<div>tel 06</div>
-				<div>tel 07</div>
-				<div>tel 08</div>
-				<div>tel 09</div>
-				<div>tel 10</div>
-				<button onclick="RunEngine()">Click me</button>
-			</div>
-			<div class="telemetry_values_container">
+		<div id="game_window">
+			<div id="driver"></div>
+			<div class="telemetry">
 				<div id="time">val 01</div>
 				<div id="velocity">val 02</div>
 				<div id="distance">val 03</div>
@@ -37,9 +25,8 @@
 				<div>val 10</div>
 			</div>
 		</div>
-		<div id="game_window">
-			<div id="driver"></div>
-		</div>
+
+		<button onclick="RunEngine()">Click me</button>
 	</div>
 </body>
 
