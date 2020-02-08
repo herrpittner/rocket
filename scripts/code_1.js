@@ -1,23 +1,29 @@
 var myInterval = 20;
 var myT = 0;
 var myVel = 0;
-var myDist = 0;
-var Output1;
-var Output2;
-var Output3;
+var myVerDist = 0;
+var myHorDist = 0;
+var g = -9.81;
+
 
 function RunEngine() {
-	var myVar = setInterval("EngineTime()", myInterval);
+	var myVar = setInterval("EngineTimeTick()", myInterval);
 }
 
-function EngineTime() {
+function EngineTimeTick() {
+	// do calculations on Physical quantities
 	myT = (myT * 1000 + myInterval) / 1000;
-	myVel = myT * 9.81;
-	myDist = 1/2 * 9.81 * myT * myT;
+	myVel = myT * g;
+	myVerDist = 1/2 * g * myT * myT;
+	myHorDist = 50 * myT;
 
 
-
+	// print it to telemetry table
 	document.getElementById("time").innerHTML = myT.toFixed(3) + " s";
 	document.getElementById("velocity").innerHTML = myVel.toFixed(3)+" m/s";
-	document.getElementById("distance").innerHTML = myDist.toFixed(3)+ " m";
+	document.getElementById("distance").innerHTML = myVerDist.toFixed(3)+ " m";
+
+	// move the driver
+	document.getElementById("driver").style.bottom = 440 + myVerDist + "px";
+	document.getElementById("driver").style.left = myHorDist + "px"
 }

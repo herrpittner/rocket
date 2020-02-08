@@ -9,34 +9,33 @@
 #game_window {
 	height: 450px;
 	width: 800px;	
-	background-color: lightskyblue;
 	position: relative;
+	border-style: solid;
+	border-width: 2px;
 }
 
-div.driver	{
+#driver	{
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	background-color: navy;
 	position: absolute;
-	top: 20px;
-	left:100px;
+	bottom: 440px;
+	left: 0px;
 }
 
-div.telemetry {
-	width: 300px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: navy;
+.telemetry {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: smaller;
+	font-weight: bold;
+}
+
+.telLineCont {
 	display: flex;
-	justify-content: space-between;
+	padding: 0.1rem;
 }
 
-.telemetry > div {
-	display: flex;
-	flex-direction: column;
+.telValue {
+	padding-left: 0.5rem;
 }
 
-.telemetry > div > div {
-	padding: 5px;
-}
