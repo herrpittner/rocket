@@ -15,7 +15,7 @@ function EngineTimeTick() {
 	myT = (myT * 1000 + myInterval) / 1000;
 	myVel = myT * g;
 	myVerDist = 1/2 * g * myT * myT;
-	myHorDist = 20 * myT;
+	myHorDist = 50 * myT;
 
 
 	// print it to telemetry table
