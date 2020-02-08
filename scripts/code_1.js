@@ -15,8 +15,6 @@ function EngineTime() {
 	myVel = myT * 9.81;
 	myDist = 1/2 * 9.81 * myT * myT;
 
-
-
 	document.getElementById("time").innerHTML = myT.toFixed(3) + " s";
 	document.getElementById("velocity").innerHTML = myVel.toFixed(3)+" m/s";
 	document.getElementById("distance").innerHTML = myDist.toFixed(3)+ " m";
