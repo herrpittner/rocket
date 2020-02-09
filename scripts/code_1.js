@@ -73,7 +73,7 @@ function SetInitDriverPosition() {
 	document.getElementById("driver").style.left = xPos + "px";
 }
 
-var vehAcc = 15; // m/s2
+var vehAcc = 100; // m/s2
 var yDist = 0;
 var xDist = 0;
 var dragAcc = 0;
