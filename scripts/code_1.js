@@ -1,8 +1,8 @@
 var myTime = 0;
 var xVel = 0;
 var yVel = 0;
-var xPos = 50;
-var yPos = 100;
+var xPos = 200;
+var yPos = 300;
 var Pitch = 0;
 const g = -9.81; // m/s2
 var myVel = 0;
@@ -97,8 +97,8 @@ function EngineTimeTick() {
 	document.getElementById("driver").style.bottom = yPos + "px";
 	document.getElementById("driver").style.left = xPos + "px";
 
-	// stop engine when altitude is 0
-	if (yPos < 0) {
+	// stop engine when out of the window
+	if (yPos < 0 || yPos > 665 || xPos < 0 || xPos > 1190) {
 		clearInterval(myTick);
 	}
 }
