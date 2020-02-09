@@ -58,6 +58,7 @@ const myInterval = 10; //ms
 const secInt = myInterval/1000;
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
+	document.getElementById("LaunchButton").style.visibility = "hidden";
 }
 
 function SetInitDriverPosition() {
