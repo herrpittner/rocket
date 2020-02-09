@@ -32,7 +32,9 @@ document.onkeydown = function(e) {
 			break;
 		case 32:
 			// alert('space');
-			RunEngine();
+			if (engineRunning == false) {
+				RunEngine();
+			}
 		break;
 		}
 };
@@ -81,10 +83,11 @@ const Ro = 1.3; // air density
 const Cd = 0.47; //sphere drag coeficient
 const sphDia = 10 // sphere diameter [m]
 const sphMass = 5000 //sphere mass [kg]
-
+var engineRunning = false;
 
 function EngineTimeTick() {
 	// do calculations on physical quantities
+	engineRunning = true;
 	myTime = myTime + secInt;
 	dragAcc = Ro * Cd * (Math.PI * sphDia * sphDia / 4) / 2 / sphMass * Vel * Vel;
 	xVel = xVel + vehAcc*xAcc*secInt - xDragAcc * secInt;
@@ -121,5 +124,6 @@ function EngineTimeTick() {
 	// stop engine when out of the window
 	if (yPos < 0 || yPos > 665 || xPos < 0 || xPos > 1190) {
 		clearInterval(myTick);
+		engineRunning = false;
 	}
 }
