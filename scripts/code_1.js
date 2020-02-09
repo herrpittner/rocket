@@ -1,17 +1,11 @@
-const myInterval = 10; //ms
 var myTime = 0;
-var myHorVel = 0;
-var myVerVel = 0;
-var myHorDist = 0;
-var myVerDist = 0;
-var myHorDist = 0;
-var myPitch = 0;
+var xVel = 20;
+var yVel = 100;
+var xPos = 50;
+var yPos = 100;
+var Pitch = 0;
 const g = -9.81;
 var myVel = 0;
-var myAltitude = 0;
-var initAltitude = 50;
-var initHorVel = 20;
-var initVerVel = 100;
 var myTick = null;
 
 window.onload = SetInitDriverPosition;
@@ -22,58 +16,65 @@ document.onkeydown = function(e) {
     switch (e.keyCode) {
         case 37:
             // alert('left');
-			HorVelDelta = HorVelDelta - 5;
+			HorVelDelta = HorVelDelta - 1;
 			break;
         case 38:
             // alert('up');
-			VerVelDelta = VerVelDelta + 5;
+			VerVelDelta = VerVelDelta + 1;
 			break;
         case 39:
             // alert('right');
-            HorVelDelta = HorVelDelta + 5;
+            HorVelDelta = HorVelDelta + 1;
 			break;
 		case 40:
             // alert('down');
-            VerVelDelta = VerVelDelta - 5;
+            VerVelDelta = VerVelDelta - 1;
 			break;
 		}
 };
 
+const myInterval = 10; //ms
+const secInt = myInterval/1000;
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
 }
 
 function SetInitDriverPosition() {
-	document.getElementById("driver").style.bottom = initAltitude + "px";
+	document.getElementById("driver").style.bottom = yPos + "px";
+	document.getElementById("driver").style.left = xPos + "px";
 }
+
+var yDist = 0;
+var xDist = 0;
 
 function EngineTimeTick() {
 	// do calculations on physical quantities
-	myTime = (myTime * 1000 + myInterval) / 1000;
-	myHorVel = initHorVel;
-	myVerVel = initVerVel + (myTime * g);
-	myVerDist = (initVerVel * myTime) + (1/2 * g * myTime * myTime);
-	myHorDist = myHorVel * myTime;
-	myPitch = Math.atan(myVerVel/myHorVel) * 180 / Math.PI;
-	myVel = Math.sqrt((myVerVel*myVerVel) + (myHorVel*myHorVel));
-	myAltitude = initAltitude + myVerDist;
+	myTime = (myTime + secInt);
+	xVel = xVel;
+	yVel = yVel + (secInt * g);
+	yPos = yPos + secInt * yVel;
+	xPos = xPos + secInt * xVel;
+	yDist = yDist + Math.abs(secInt * yVel);
+	xDist = xDist + Math.abs(secInt * xVel);
+	Pitch = Math.atan(yVel/xVel) * 180 / Math.PI;
+	myVel = Math.sqrt((yVel*yVel) + (xVel*xVel));
 
 	// print it to telemetry table
 	document.getElementById("time").innerHTML = myTime.toFixed(3) + " s";
-	document.getElementById("Vvel").innerHTML = myVerVel.toFixed(3)+" m/s";
-	document.getElementById("Vdist").innerHTML = myVerDist.toFixed(3)+ " m";
-	document.getElementById("Hvel").innerHTML = myHorVel.toFixed(3)+" m/s";
-	document.getElementById("Hdist").innerHTML = myHorDist.toFixed(3)+ " m";
 	document.getElementById("Vel").innerHTML = myVel.toFixed(3)+ " m/s";
-	document.getElementById("Pitch").innerHTML = myPitch.toFixed(3)+ " deg";
-	document.getElementById("Alt").innerHTML = myAltitude.toFixed(3)+ " m";
+	document.getElementById("Alt").innerHTML = yPos.toFixed(3)+ " m";
+	document.getElementById("Vvel").innerHTML = yVel.toFixed(3)+" m/s";
+	document.getElementById("Hvel").innerHTML = xVel.toFixed(3)+" m/s";
+	document.getElementById("Vdist").innerHTML = yDist.toFixed(3)+ " m";
+	document.getElementById("Hdist").innerHTML = xDist.toFixed(3)+ " m";
+	document.getElementById("Pitch").innerHTML = Pitch.toFixed(3)+ " deg";
 
 	// move the driver
-	document.getElementById("driver").style.bottom = myAltitude + "px";
-	document.getElementById("driver").style.left = myHorDist + "px"
+	document.getElementById("driver").style.bottom = yPos + "px";
+	document.getElementById("driver").style.left = xPos + "px";
 
 	// stop engine when altitude is 0
-	if (myAltitude < 0) {
+	if (yPos < 0) {
 		clearInterval(myTick);
 	}
 }
