@@ -30,6 +30,10 @@ document.onkeydown = function(e) {
             // alert('down');
             yAcc = -1;
 			break;
+		case 32:
+			// alert('space');
+			RunEngine();
+		break;
 		}
 };
 
