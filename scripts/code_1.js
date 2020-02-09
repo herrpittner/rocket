@@ -61,7 +61,7 @@ document.onkeyup = function(e) {
 };
 
 const myInterval = 1000/60; //ms
-const gameSpeed = 5;
+const gameSpeed = 1;
 const secInt = myInterval / 1000 * gameSpeed;
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
