@@ -55,7 +55,8 @@ document.onkeyup = function(e) {
 };
 
 const myInterval = 10; //ms
-const secInt = myInterval/1000;
+const gameSpeed = 5;
+const secInt = myInterval / 1000 * gameSpeed;
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
 	document.getElementById("LaunchButton").style.visibility = "hidden";
@@ -72,7 +73,7 @@ var xDist = 0;
 
 function EngineTimeTick() {
 	// do calculations on physical quantities
-	myTime = (myTime + secInt);
+	myTime = myTime + secInt;
 	xVel = xVel + vehAcc * xAcc * secInt;
 	yVel = yVel + (secInt * g) + vehAcc * yAcc * secInt;
 	yPos = yPos + secInt * yVel;
