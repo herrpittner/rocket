@@ -1,34 +1,55 @@
 var myTime = 0;
-var xVel = 20;
-var yVel = 100;
+var xVel = 0;
+var yVel = 0;
 var xPos = 50;
 var yPos = 100;
 var Pitch = 0;
-const g = -9.81;
+const g = -9.81; // m/s2
 var myVel = 0;
 var myTick = null;
 
 window.onload = SetInitDriverPosition;
 
-var HorVelDelta = 0;
-var VerVelDelta = 0;
+var xAcc = 0;
+var yAcc = 0;
 document.onkeydown = function(e) {
     switch (e.keyCode) {
         case 37:
             // alert('left');
-			HorVelDelta = HorVelDelta - 1;
+			xAcc = -1;
 			break;
         case 38:
             // alert('up');
-			VerVelDelta = VerVelDelta + 1;
+			yAcc = +1;
 			break;
         case 39:
             // alert('right');
-            HorVelDelta = HorVelDelta + 1;
+            xAcc = +1;
 			break;
 		case 40:
             // alert('down');
-            VerVelDelta = VerVelDelta - 1;
+            yAcc = -1;
+			break;
+		}
+};
+
+document.onkeyup = function(e) {
+    switch (e.keyCode) {
+        case 37:
+            // alert('left');
+			xAcc = 0;
+			break;
+        case 38:
+            // alert('up');
+			yAcc = 0;
+			break;
+        case 39:
+            // alert('right');
+            xAcc = 0;
+			break;
+		case 40:
+            // alert('down');
+            yAcc = 0;
 			break;
 		}
 };
@@ -44,14 +65,15 @@ function SetInitDriverPosition() {
 	document.getElementById("driver").style.left = xPos + "px";
 }
 
+var vehAcc = 15; // m/s2
 var yDist = 0;
 var xDist = 0;
 
 function EngineTimeTick() {
 	// do calculations on physical quantities
 	myTime = (myTime + secInt);
-	xVel = xVel;
-	yVel = yVel + (secInt * g);
+	xVel = xVel + vehAcc * xAcc * secInt;
+	yVel = yVel + (secInt * g) + vehAcc * yAcc * secInt;
 	yPos = yPos + secInt * yVel;
 	xPos = xPos + secInt * xVel;
 	yDist = yDist + Math.abs(secInt * yVel);
