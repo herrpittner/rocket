@@ -1,6 +1,7 @@
 const myInterval = 10; //ms
 var myTime = 0;
 var myHorVel = 0;
+var myVerVel = 0;
 var myHorDist = 0;
 var myVerDist = 0;
 var myHorDist = 0;
@@ -14,6 +15,29 @@ var initVerVel = 100;
 var myTick = null;
 
 window.onload = SetInitDriverPosition;
+
+var HorVelDelta = 0;
+var VerVelDelta = 0;
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 37:
+            // alert('left');
+			HorVelDelta = HorVelDelta - 5;
+			break;
+        case 38:
+            // alert('up');
+			VerVelDelta = VerVelDelta + 5;
+			break;
+        case 39:
+            // alert('right');
+            HorVelDelta = HorVelDelta + 5;
+			break;
+		case 40:
+            // alert('down');
+            VerVelDelta = VerVelDelta - 5;
+			break;
+		}
+};
 
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
