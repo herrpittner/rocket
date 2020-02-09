@@ -9,8 +9,8 @@ const g = -9.81;
 var myVel = 0;
 var myAltitude = 0;
 var initAltitude = 50;
-var initHorVel = 50;
-var initVerVel = 50;
+var initHorVel = 20;
+var initVerVel = 100;
 var myTick = null;
 
 window.onload = SetInitDriverPosition;
@@ -27,11 +27,11 @@ function EngineTimeTick() {
 	// do calculations on physical quantities
 	myTime = (myTime * 1000 + myInterval) / 1000;
 	myHorVel = initHorVel;
-	myVerVel = initVerVel + myTime * g;
-	myVerDist = 1/2 * myVerVel * myTime;
+	myVerVel = initVerVel + (myTime * g);
+	myVerDist = (initVerVel * myTime) + (1/2 * g * myTime * myTime);
 	myHorDist = myHorVel * myTime;
 	myPitch = Math.atan(myVerVel/myHorVel) * 180 / Math.PI;
-	myVel = Math.sqrt(myVerVel*myVerVel + myHorVel*myHorVel);
+	myVel = Math.sqrt((myVerVel*myVerVel) + (myHorVel*myHorVel));
 	myAltitude = initAltitude + myVerDist;
 
 	// print it to telemetry table
