@@ -1,6 +1,6 @@
 var myTime = 0;
-var xVel = 0;
-var yVel = 0;
+var xVel = 300;
+var yVel = 300;
 var xPos = 100;
 var yPos = 100;
 var Pitch = 0;
@@ -59,7 +59,7 @@ document.onkeyup = function(e) {
 };
 
 const myInterval = 1000/60; //ms
-const gameSpeed = 1;
+const gameSpeed = 5;
 const secInt = myInterval / 1000 * gameSpeed;
 function RunEngine() {
 	myTick = setInterval("EngineTimeTick()", myInterval);
@@ -80,7 +80,7 @@ var yDragAcc = 0;
 const Ro = 1.3; // air density
 const Cd = 0.47; //sphere drag coeficient
 const sphDia = 10 // sphere diameter [m]
-const sphMass = 1000 //sphere mass [kg]
+const sphMass = 5000 //sphere mass [kg]
 
 
 function EngineTimeTick() {
@@ -101,7 +101,7 @@ function EngineTimeTick() {
 
 
 	// print it to telemetry table
-	document.getElementById("time").innerHTML = myTime.toFixed(3) + " s";
+	document.getElementById("time").innerHTML = (myTime/gameSpeed).toFixed(3) + " s";
 	document.getElementById("Vel").innerHTML = Vel.toFixed(3)+ " m/s";
 	document.getElementById("Alt").innerHTML = yPos.toFixed(3)+ " m";
 	document.getElementById("Vvel").innerHTML = yVel.toFixed(3)+" m/s";
