@@ -13,14 +13,16 @@ body {
 
 .button {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: smaller;
+	font-size: 50px;
 	font-weight: bold;
 	color: darkgrey;
 	background-color: rgb(26, 26, 26);
-	width: 1200px;
-	height: 50px;
 	border: none;
 	outline: none;
+}
+
+.button:hover {
+	cursor: pointer;
 }
 
 #game_window {
