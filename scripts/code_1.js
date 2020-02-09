@@ -1,8 +1,8 @@
 var myTime = 0;
-var xVel = 300;
-var yVel = 300;
-var xPos = 100;
-var yPos = 100;
+var xVel = 500;
+var yVel = 500;
+var xPos = 10;
+var yPos = 10;
 var Pitch = 0;
 const g = -9.81; // m/s2
 var Vel = 0;
