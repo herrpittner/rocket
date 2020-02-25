@@ -60,7 +60,7 @@ document.onkeyup = function(e) {
 		}
 };
 
-const myInterval = 1000/60; //ms
+const myInterval = 1000/50; //ms
 const gameSpeed = 1;
 const secInt = myInterval / 1000 * gameSpeed;
 function RunEngine() {
@@ -73,7 +73,7 @@ function SetInitDriverPosition() {
 	document.getElementById("driver").style.left = xPos + "px";
 }
 
-var vehAcc = 15; // m/s2
+var vehAcc = 100; // m/s2
 var yDist = 0;
 var xDist = 0;
 var dragAcc = 0;
@@ -82,12 +82,14 @@ var yDragAcc = 0;
 const Ro = 1.3; // air density
 const Cd = 0.47; //sphere drag coeficient
 const sphDia = 10 // sphere diameter [m]
-const sphMass = 5000 //sphere mass [kg]
+const sphMass = 10000 //sphere mass [kg]
 var engineRunning = false;
+var tickCount = 0;
 
 function EngineTimeTick() {
 	// do calculations on physical quantities
 	engineRunning = true;
+	tickCount ++
 	myTime = myTime + secInt;
 	dragAcc = Ro * Cd * (Math.PI * sphDia * sphDia / 4) / 2 / sphMass * Vel * Vel;
 	xVel = xVel + vehAcc*xAcc*secInt - xDragAcc * secInt;
@@ -100,8 +102,6 @@ function EngineTimeTick() {
 	Vel = Math.sqrt((yVel*yVel) + (xVel*xVel));
 	xDragAcc = dragAcc * xVel/Vel;
 	yDragAcc = dragAcc * yVel/Vel;
-
-
 
 	// print it to telemetry table
 	document.getElementById("time").innerHTML = (myTime/gameSpeed).toFixed(3) + " s";
@@ -116,6 +116,15 @@ function EngineTimeTick() {
 	document.getElementById("xDrag").innerHTML = xDragAcc.toFixed(3)+ "";
 	document.getElementById("yDrag").innerHTML = yDragAcc.toFixed(3)+ "";
 
+	// print traces of driver
+	if ((tickCount % 10) == 0) {
+		var para = document.createElement("DIV");
+		// para.innerHTML = "This is a trace." + tickCount;
+		para.className = "trace"
+		document.getElementById("game_window").appendChild(para);
+		para.style.bottom = yPos + 5 + "px";
+		para.style.left = xPos + 5 + "px";
+	}
 
 	// move the driver
 	document.getElementById("driver").style.bottom = yPos + "px";
